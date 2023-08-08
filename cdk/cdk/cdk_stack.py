@@ -23,6 +23,6 @@ class CdkStack(Stack):
         s3_deployment.BucketDeployment(
             self,
             id="bucketDeployment",
-            sources=[s3_deployment.Source.asset("../frontend/build")],
+            sources=[s3_deployment.Source.asset("../frontend/public")],
             destination_bucket=myBucket
         )
