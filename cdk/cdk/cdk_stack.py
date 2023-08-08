@@ -2,10 +2,9 @@ from constructs import Construct
 from aws_cdk import (
     Duration,
     Stack,
-    aws_iam as iam,
-    aws_sqs as sqs,
-    aws_sns as sns,
-    aws_sns_subscriptions as subs,
+    aws_s3 as s3,
+    aws_s3_deployment as s3_deployment
+
 )
 
 
@@ -14,13 +13,16 @@ class CdkStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        queue = sqs.Queue(
-            self, "CdkQueue",
-            visibility_timeout=Duration.seconds(300),
+        myBucket = s3.Bucket(
+            self,
+            id="Bucket",
+            public_read_access=True,
+            website_index_document="index.html"
         )
 
-        topic = sns.Topic(
-            self, "CdkTopic"
+        s3_deployment.BucketDeployment(
+            self,
+            id="bucketDeployment",
+            sources=[s3_deployment.Source.asset("../frontend/build")],
+            destination_bucket=myBucket
         )
-
-        topic.add_subscription(subs.SqsSubscription(queue))
