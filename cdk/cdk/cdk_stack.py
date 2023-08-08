@@ -3,7 +3,10 @@ from aws_cdk import (
     Duration,
     Stack,
     aws_s3 as s3,
-    aws_s3_deployment as s3_deployment
+    aws_s3_deployment as s3_deployment,
+    aws_ec2 as ec2,
+    aws_elasticloadbalancing as elb,
+    aws_vpclattice as vpc
 
 )
 
@@ -25,6 +28,19 @@ class CdkStack(Stack):
                 restrict_public_buckets=False,
             )
             
+        )
+
+        myLB = elb.LoadBalancer(
+            self,
+            vpc=vpc,
+            internet_facing=True
+        )
+
+        myInstance = ec2.Instance(
+            self,
+            id="testInstance",
+            instance_type=ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE2, ec2.InstanceSize.MICRO),
+            machine_image=ec2.AmazonLinuxImage(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2)
         )
 
         s3_deployment.BucketDeployment(
