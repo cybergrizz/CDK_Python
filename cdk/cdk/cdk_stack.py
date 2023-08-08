@@ -17,7 +17,14 @@ class CdkStack(Stack):
             self,
             id="Bucket",
             public_read_access=True,
-            website_index_document="index.html"
+            website_index_document="index.html",
+            block_public_access=s3.BlockPublicAccess(
+                block_public_acls=False,
+                block_public_policy=False,
+                ignore_public_acls=False,
+                restrict_public_buckets=False,
+            )
+            
         )
 
         s3_deployment.BucketDeployment(

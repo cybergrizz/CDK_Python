@@ -18,6 +18,12 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                   "aws:cdk:cloudformation:props": {
+                    "publicAccessBlockConfiguration": {
+                      "blockPublicAcls": false,
+                      "blockPublicPolicy": false,
+                      "ignorePublicAcls": false,
+                      "restrictPublicBuckets": false
+                    },
                     "tags": [
                       {
                         "key": "aws-cdk:cr-owned:c7e5169d",

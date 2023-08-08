@@ -3,6 +3,12 @@
   "Bucket83908E77": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": false,
+     "BlockPublicPolicy": false,
+     "IgnorePublicAcls": false,
+     "RestrictPublicBuckets": false
+    },
     "Tags": [
      {
       "Key": "aws-cdk:cr-owned:c7e5169d",
@@ -89,7 +95,7 @@
      }
     ],
     "SourceObjectKeys": [
-     "1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0.zip"
+     "de6ab83175d094677e22382bd0adc6e4c2a3b6591eb1d88650d00b5f3e06c758.zip"
     ],
     "DestinationBucketName": {
      "Ref": "Bucket83908E77"
